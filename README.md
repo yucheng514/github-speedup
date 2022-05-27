@@ -1,0 +1,2 @@
+# github-speedup
+For Mac
