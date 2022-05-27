@@ -30,22 +30,21 @@ addr2ip = {}
 
 def getIp(siteAdd):
 	
-	engine = "https://ipaddress.com/search/"
-	headers = headers={'user-agent':'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebkit/737.36(KHTML, like Gecke) Chrome/52.0.2743.82 Safari/537.36','Host':'movie.douban.com'
-}	
+	# engine = "https://ipaddress.com/search/"
+	# headers = {'user-agent':'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebkit/737.36(KHTML, like Gecke) Chrome/52.0.2743.82 Safari/537.36','Host':'movie.douban.com'}	
 
-	url = "http://ip.tool.chinaz.com/"+siteAdd
+	url = "http://ip.tool.chinaz.com/" + siteAdd
 	try:
 		res = requests.get(url)
-		soup=BeautifulSoup(res.text,'html.parser')
-		result=soup.find_all('span', class_="Whwtdhalf w15-0 lh45")
+		soup = BeautifulSoup(res.text,'html.parser')
+		result = soup.find_all('span', class_="Whwtdhalf w15-0 lh45")
 		trueip = None
 		for c in result:
 			ip = re.findall(r"\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b", c.text)
-			if len(ip)!= 0:
+			if len(ip) != 0:
 				trueip = ip[0] 
 	except:
-		print("查询"+siteAdd+" 时出现错误")
+		print("查询" + siteAdd + " 时出现错误")
 		return None
 	
 	return trueip	
@@ -58,7 +57,7 @@ def generateDict():
 		ip = getIp(site)
 		if ip != None:
 			addr2ip[site] = ip
-			print(site+"\t"+ip)
+			print(site + "\t" + ip)
 		
 
 def chachong(line):
@@ -76,22 +75,23 @@ def chachong(line):
 def updateHost():
 	generateDict()
 	today = datetime.date.today()
-	hostLocation = "C:\Windows\System32\drivers\etc\hosts"
-	shutil.copy("C:\Windows\System32\drivers\etc\hosts", "C:\Windows\System32\drivers\etc\hosts.bak") # 做一份host备份
-	f1 = open("C:\Windows\System32\drivers\etc\hosts", "r")
+	path = "C:\Windows\System32\drivers\etc\hosts"
+	backup = "C:\Windows\System32\drivers\etc\hosts.bak"
+	shutil.copy(path, backup) # 做一份host备份
+	f1 = open(path, "r") # r: 以只读方式打开文件。文件的指针将会放在文件的开头。
 	lines = f1.readlines()
-	f2 = open("temphost", "w")
+	f2 = open("temphost", "w") # w: 打开一个文件只用于写入。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。
 	
 	for line in lines:                       # 为了防止host越写用越长，需要删除之前更新的含有github相关内容
 		if chachong(line) == False:
 			f2.write(line)
-	f2.write("\n\n #*********************github "+str(today) +" 更新********************\n")
+	f2.write("\n\n #********************* github " + str(today) + " update ********************\n")
 	for key in addr2ip:
-		f2.write(addr2ip[key]+"\t"+key+"\n")
+		f2.write(addr2ip[key] + "\t" + key + "\n")
 	f1.close()
 	f2.close()
 	
-	shutil.copy("./temphost", "C:\Windows\System32\drivers\etc\hosts") #覆盖原来的host
-	os.system("ipconfig /flushdns")
+	shutil.copy("./temphost", path) #覆盖原来的host
+	# os.system("ipconfig /flushdns")
 	
 updateHost()	
