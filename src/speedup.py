@@ -75,12 +75,15 @@ def chachong(line):
 def updateHost():
 	generateDict()
 	today = datetime.date.today()
-	path = "C:\Windows\System32\drivers\etc\hosts"
-	backup = "C:\Windows\System32\drivers\etc\hosts.bak"
+	# path = "C:\Windows\System32\drivers\etc\hosts"
+	# backup = "C:\Windows\System32\drivers\etc\hosts.bak"
+	path = "./hosts"
+	backup = "./hosts.backup"
 	shutil.copy(path, backup) # 做一份host备份
 	f1 = open(path, "r") # r: 以只读方式打开文件。文件的指针将会放在文件的开头。
 	lines = f1.readlines()
-	f2 = open("temphost", "w") # w: 打开一个文件只用于写入。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。
+	f2 = open("temphost", "w") 
+	# f2 = open("temphost", "w+") # w: 打开一个文件只用于写入。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。
 	
 	for line in lines:                       # 为了防止host越写用越长，需要删除之前更新的含有github相关内容
 		if chachong(line) == False:
