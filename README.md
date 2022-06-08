@@ -16,3 +16,16 @@
 ```
 sudo sh init.sh
 ```
+或者
+```
+npm run init
+```
+
+
+
+
+
+### todo
+
+- [ ] 添加 command 文件
+- [ ] 用 node 改为 js 版本

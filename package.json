@@ -1,0 +1,20 @@
+{
+  "name": "github-speedup",
+  "version": "1.0.0",
+  "description": "解决 Mac 上 github 加载和下载速度慢的问题",
+  "main": "index.js",
+  "scripts": {
+    "init": "sudo sh init.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daluozha/github-speedup.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/daluozha/github-speedup/issues"
+  },
+  "homepage": "https://github.com/daluozha/github-speedup#readme"
+}
