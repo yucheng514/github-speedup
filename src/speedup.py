@@ -77,6 +77,7 @@ def updateHost():
 	today = datetime.date.today()
 	path = "/private/etc/hosts"
 	backup = "/private/etc/hosts.backup"
+	# temphost = "./temphost"
 	temphost = "./src/temphost"
 	shutil.copy(path, backup) # 做一份 host 备份
 	f1 = open(path, "r") # r: 以只读方式打开文件。文件的指针将会放在文件的开头。
