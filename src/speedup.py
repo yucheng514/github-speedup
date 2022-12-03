@@ -16,6 +16,7 @@ sites =[
 	"gist.github.com",
 	"help.github.com",
 	"nodeload.github.com",
+    "raw.githubusercontent.com",
 	"raw.github.com",
 	"status.github.com",
 	"training.github.com",
